@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}{{ acc_type_cap }} account number {{ acc_number }} - Transfer Order{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<br>
+In this area, one can transfer the money to other accounts, provided these accounts exist in the first place. For added security, if you write the optional fields, and if they don't match with the recipient's account, the transfer order will be canceled.
+{% if acc_type == 'central' %}
+<br><br>
+<b><font color='blue'>This is a central account! You have central banking powers! Use them wisely.</font></b>
+<br>
+Because this is a central account, you are allowed to manipulate the money supply: That is, any transfer will create money out of thin air (or destroy it), from other account that coincides with this world. Furthermore, you can also charge others with negative amounts (issuing payment orders to others). Have caution! If your world is particularly big, with many users on it, creating more money without having new people joining in will result in economic inflation! (so cool, huh?!).
+{% endif %}
+<br>
+
+<form method="post">
+	{% if not single_currency %}
+    <label for="currency_select">Select a currency:</label>
+ 	<select name="currency_select">
+		{% for currency in currencies %}
+		<option value="{{ currency['id'] }}">{{ currency['html'] }}</option>
+		{% endfor %}
+	</select> 
+	{% endif %}
+
+    <label for="value">Value to be transfered:</label>
+    <input name="value" id="value" class="money" onkeyup="document.getElementById('value').value = correct_money(document.getElementById('value').value, {{ currencies[0]['exponent'] }})" required>
+
+    <label for="to_account">Account number to send the value</label>
+    <input name="to_account" id="to_account" required>
+
+    <label for="to_account">Give a description/reason for the transfer (optional)</label>
+    <input name="description" id="description">
+
+    <label for="date">Schedule a date and time for the transfer. Leaving it blank, the order will be processed immediately. The time will be processed according to your timezone. <br>Use the international standard of date/time format: YYYY-MM-DD HH:MM:SS (aka, ISO-8601, the standard everybody should be using worldwide, the standard everybody should be using worldwide) (optional field)</label>
+    <input name="date" id="date" disabled="disabled">
+
+	<div>
+    <label for="to_username">Username of the recipient: (optional field)</label>
+    <input name="to_username" id="to_username" disabled="disabled">
+	</div>
+
+	<div>
+    <label for="to_discord">Discord of the recipient: (optional field)</label>
+    <input name="to_discord" id="to_discord" disabled="disabled">
+	</div>
+
+    <label for="name">Be aware! Once the order is processed and the money transfered, <font color='red'>it is irreversible.</font></label>
+    <input type="submit" value="Execute transfer order">
+</form>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+<h1>{{ account_type }} account, number {{ account_number }}.</h1>
+<ul>
+<h3><a href="{{ url_for('account.transfer', acc_number=account_number) }}">Transfer Operation</a></h3>
+</ul>
+{% endblock %}
+
+
+{% block content %}
+  <form method="post">
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Value</th>
+	<th>Balance</th>
+    <th>Description</th>
+  </tr>
+  {% for movement in movements %}
+	<tr>
+    	<td>{{ movement['date'] }}</td>
+		<td>{{ movement['value'] | safe }}</td>
+		<td>{{ movement['balance'] | safe }}</td>
+    	<td><small>{{ movement['desc'] }}</small></td>
+	</tr>
+  {% endfor %}
+</table>
+{% endblock %}
+

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Managment world #{{ world['id'] }}: {{ world['name'] }} {% endblock %}</h1>
+{% endblock %}
+
+
+{% block content %}
+<ul>
+{% if world['private'] %}
+<li><a href="{{ url_for('world.manage_link', world_id=world['id']) }}">Manage links</a></li>
+{% endif %}
+<li><a href="">Edit page</a></li>
+<li><a href="{{ url_for('account.create', world_id=world['id']) }}">Create account</a></li>
+<li><a href="{{ url_for('account.central', world_id=world['id']) }}">Central Banking</a></li>
+</ul> 
+
+<h2>Registered currencies:</h2>
+<table>
+	<tr>
+		<th>ID</th>
+		<th>ISO-4217</th>
+		<th>Where</th>
+		<th>Name</th>
+	</tr>
+  {% for currency in currencies %}
+	<tr>
+    	<td>#{{ currency['id'] }}</td>
+    	<td>{{ currency['iso'] }}</td>
+    	<td>{{ currency['where'] }}</td>
+    	<td>{{ currency['name'] }}</td>
+	</tr>
+  {% endfor %}
+</table>
+
+<br>
+<h2>Registered Accounts:</h2>
+<table>
+	<tr>
+		<th>Number</th>
+		<th>Balance</th>
+		<th>Last Transaction</th>
+	</tr>
+  {% for account in accounts %}
+	<tr>
+    	<td><a href="{{ url_for('account.view', acc_number=account['number']) }}">{{ account['number'] }}</a></td>
+    	<td>{{ account['balance'] | safe}}</td>
+    	<td>{{ account['last_transaction'] }}</td>
+	</tr>
+  {% endfor %}
+</table>
+
+
+{% endblock %}

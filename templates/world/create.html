@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Create a World!{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="name">Name of the world:</label>
+    <input name="name" id="name" required>
+    
+	<label for="name">Select the visibility of the world:</label>
+	<div>
+		<input type="radio" id="public" name="visibility" value="public" checked>
+		<label for="public">Public</label>
+	</div>
+
+	<div>
+		<input type="radio" id="private" name="visibility" value="private">
+		<label for="private">Private</label>
+	</div>
+
+    <label for="currencies">Indicate the ISO code for the currencies the world will use. Comma-separated, no spaces.</label>
+    <input name="currencies" id="currencies" class="csv" required>
+
+	<div>
+    <label for="short">Indicate the maximum amount of accounts an user can make. (Blank means, unlimited)</label>
+    <input name="max_acc" id="max_acc">
+	</div>
+
+    <label for="short">Short description:</label>
+    <input name="short" id="short">
+
+    <label for="long">Long description. Include here what's the world about, and how one can find it (a discord server? a website?).</label>
+    <textarea name="long" id=long"></textarea>
+
+    <input type="submit" value="Create World!">
+  </form>
+{% endblock %}

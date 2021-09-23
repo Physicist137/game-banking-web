@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %} Currency #{{ currency['id']}}: [{{ currency['iso'] }}] {{ currency['names'] }} {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h2>{{ currency['name'] }}</h2>
+<br>
+<ul>
+<li>ISO-4217: {{ currency['iso'] }}</li>
+<li>Prefix: {{ currency['prefix'] }}</li>
+<li>Posfix: {{ currency['posfix'] }}</li>
+<li>Exponent: {{ currency['exponent'] }}</li>
+<li>From where: {{ currency['from_where'] }}</li>
+<li>Reference: <a href="{{ currency['reference'] }}">{{ currency['reference'] }}</a></li>
+</ul>
+<div><label for="long"> {{ currency['short_description'] }}</label></div><br>
+<div><textarea name="long" id=long" readonly>{{ currency['long_description'] }}</textarea></div>
+{% endblock %}

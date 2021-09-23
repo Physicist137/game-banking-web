@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}List of worlds{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<table>
+	<tr>
+    	<th>ID</th>
+    	<th>Name</th>
+    	<th>Description</th>
+	</tr>
+  {% for world in worlds %}
+	<tr>
+    	<td>#{{ world['id'] }}</td>
+		<td><a href="{{ url_for('world.view', world_id=world['id']) }}">{{ world['name'] }}</a></td>
+    	<td>{{ world['desc'] }}</td>
+	</tr>
+  {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Register{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<br>
+Please keep in mind this website was built for fun purposes.
+It doesn't have the security procedures that serious banks should have.
+Even if we will hash/encrypt your password before storing it in our database,
+<b><font color='red'> your password is not protected/safe here</font></b>. Please keep that in mind.
+Do not choose a password that you used elsewhere, let alone one which is important/sensitive for you.
+<br>
+  <form method="post">
+    <label for="username">Username</label>
+    <input name="username" id="username" required>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required>
+    <label for="password">Password (retype it, please?)</label>
+    <input type="password" name="password2" id="password2" required>
+    <label for="email">Email (optional field)</label>
+    <input name="email" id="email">
+    <label for="discord">Discord (optional field)</label>
+    <input name="discord" id="discord">
+    <label for="other">Other (optional field) (tell us how else we can find/contact you) (or, tell us where else you do exist)</label>
+    <textarea name="other" id=other"></textarea>
+    <input type="submit" value="Register">
+  </form>
+{% endblock %}

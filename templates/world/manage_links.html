@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Managment Links - World #{{ world['id'] }}: {{ world['name'] }} {% endblock %}</h1>
+{% endblock %}
+
+
+{% block content %}
+<h2>Create new link:</h2>
+<form method="post">
+    <label for="name">Expiration date (leave blank if unlimited) (use format YYYY-MM-DD HH:MM:SS)</label>
+    <input name="name" id="name" class=datetime>
+
+    <input type="submit" value="Create new link!">
+</form>
+
+<br>
+<h2>Links:</h2>
+<table>
+	<tr>
+		<th>Create Date</th>
+		<th>Expire Date</th>
+		<th>Status</th>
+		<th>Link</th>
+		<th>Disable</th>
+	</tr>
+  {% for link in links %}
+	<tr>
+    	<td>{{ link['creation_date'] }}</td>
+    	<td>{{ link['expire_date'] }}</td>
+    	<td>{{ link['status'] | safe }}</td>
+    	<td><small><a href="{{ link['link'] }}">{{ link['link'] }}</a><small></td>
+    	<td><a href="">disable</a></td>
+	</tr>
+  {% endfor %}
+</table>
+
+
+{% endblock %}

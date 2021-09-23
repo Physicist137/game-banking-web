@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Create a Currency!{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<br>
+Please search all in the currency list if there exists the currency you want to create.
+Let's try to keep repetition to a minimum (or, even better, to a null).
+Once you create the currency, it will be reviewed, and it might be accepted or rejected.
+While in the waiting, you already can use it. But, if it is rejected, it will be erased, so....
+<br>
+  <form method="post">
+    <label for="name">Names of the currency (comma separated).</label>
+    <label for="name">Eg.: United States Dollar, US Dollar.</label>
+    <input name="names" id="names" required>
+    
+	<div>
+    <label for="iso">Currency ISO 4217 code identification. Eg.: USD</label>
+    <input name="iso" id="iso" required>
+	</div>
+
+	<div>
+    <label for="prefix">Symbol Prefix: Eg.: $</label>
+    <input name="prefix" id="prefix">
+	</div>
+
+	<div>
+    <label for="posfix">Symbol Posfix.</label>
+    <input name="posfix" id="posfix">
+	</div>
+
+	<div>
+    <label for="exponent">Indicate the amount of decimal divisions. Eg.: 2</label>
+    <input name="exponent" id="exponent" required>
+	</div>
+
+    <label for="from_where">Indicate from where this currency is.</label>
+    <label for="from_where">Eg.: Real World</label>
+    <input name="from_where" id="from_where">
+
+    <label for="short_description">Give a short description of this currency.</label>
+    <input name="short_description" id="short_description">
+
+    <label for="reference">Give a reference for this currency, if there is. Wikipedia is preffered.</label>
+    <label for="reference">Eg.: https://en.wikipedia.org/wiki/United_States_dollar</label>
+    <input name="reference" id="reference">
+
+    <label for="long_description">Long description. Feel free to copy paste something from the wikipedia page.</label>
+    <textarea name="long_description" id=long_description"></textarea>
+
+    <input type="submit" value="Propose this new currency!">
+  </form>
+{% endblock %}

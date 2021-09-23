@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}List of currencies{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<table>
+	<tr>
+    	<th>ID</th>
+    	<th>ISO-4217</th>
+    	<th>Where</th>
+    	<th>Name</th>
+	</tr>
+  {% for currency in currencies %}
+	<tr>
+    	<td>#{{ currency['id'] }}</td>
+    	<td><a href={{ url_for('currency.view', currency_id=currency['id']) }}>{{ currency['iso'] }}</a></td>
+    	<td>{{ currency['where'] }}</td>
+    	<td>{{ currency['names'] }}</td>
+	</tr>
+  {% endfor %}
+</table>
+{% endblock %}

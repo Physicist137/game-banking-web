@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Welcome, {{ username }}. {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h2>Your accounts:</h2>
+<table>
+	<tr>
+		<th>Number</th>
+		{% if not single_world %}
+		<th>World</th>
+		{% endif %}
+		<th>Balance</th>
+		<th>Last Transaction</th>
+	</tr>
+  {% for account in accounts %}
+	<tr>
+    	<td><a href="{{ url_for('account.view', acc_number=account['number']) }}">{{ account['number'] }}</a></td>
+		{% if not single_world %}
+    	<td><a href="{{ url_for('world.view', world_id=account['world_id']) }}">{{ account['world'] }}</a></td>
+		{% endif %}
+    	<td>{{ account['balance'] | safe }}</td>
+    	<td>{{ account['last_transaction'] }}</td>
+	</tr>
+  {% endfor %}
+</table>
+
+
+
+<br>
+{% if has_worlds %}
+<h2>Your worlds:</h2>
+<table>
+	<tr>
+		<th>ID</th>
+		<th>Visibility</th>
+		<th>Name</th>
+		<th>Available Actions</th>
+	</tr>
+  {% for world in worlds %}
+	<tr>
+    	<td>{{ world['id'] }}</td>
+
+		{% if world['private'] %}
+    	<td><font color='orange'>private</font></td>
+		{% else %}
+    	<td><font color='green'>public</font></td>
+		{% endif %}
+
+		<td><a href="{{ url_for('world.view', world_id=world['id']) }}">{{ world['name'] }}</a></td>
+		<td><a href="{{ url_for('world.manage', world_id=world['id']) }}">Manage World</a></td>
+	</tr>
+  {% endfor %}
+</table>
+{% endif %}
+{% endblock %}
